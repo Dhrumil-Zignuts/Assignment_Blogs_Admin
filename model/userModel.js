@@ -7,11 +7,11 @@ const userSchema = mongoose.Schema({
         unique : true,
         match : /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
     },
-    Password :{
+    password :{
         type: String,
         required : true
     }
 
 })
 
-module.exports = mongoose.model('User', userSchema)
+module.exports = mongoose.model('BloggingPlatform_user', userSchema)

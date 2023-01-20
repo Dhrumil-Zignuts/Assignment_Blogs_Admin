@@ -9,9 +9,9 @@ const User = require('../model/userModel')
 const login = (req, res) => {
     console.log(req.body);
     User.findOne({ email: req.body.email }).then(user => {
-        if (user < 1) {
+        if (!user) {
             res.status(401).json({
-                message: 'Authentication failed'
+                message: `You haven't account on this email`
             })
         } else {
             bcrypt.compare(req.body.password, user.password, (err, result) => {
@@ -29,9 +29,11 @@ const login = (req, res) => {
                         {
                             expiresIn: '1h'
                         })
-                    res.status(201).json({
-                        message: 'Authentication Successful and Token Generated and stored in cookie',
-                        token: token
+                    res.cookie('access_token',token,{
+                        httpOnly : true
+                    }).status(200).json({
+                        message : 'Authentication Successful and Token Generated and stored in cookie',
+                        token : token
                     })
                 } else {
                     res.status(500).json({
@@ -47,7 +49,24 @@ const login = (req, res) => {
     })
 }
 
+const logout = (req,res)=>{
+    try{
+        res
+        .clearCookie('access_token')
+        .status(200)
+        .json({
+            message: "you Successfully Logout yourself"
+        })
+    }catch(err){
+        res
+        .status(500)
+        .json({
+            error: err
+        })
+    }
+}
 
 module.exports = {
-    login
+    login,
+    logout
 }
