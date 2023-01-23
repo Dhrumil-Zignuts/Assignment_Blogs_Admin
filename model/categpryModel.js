@@ -4,7 +4,7 @@ const categorySchema = mongoose.Schema({
     newCategory : {
         type : String,
         required : true,
-        unique : true
+        // unique : true
     }
 })
 
