@@ -9,7 +9,7 @@ const getAllCategory = async (req,res)=>{
         //     message : "Here are all Category",
         //     allCategory : allBlogs
         // })
-        res.render('tables', {data : allCategory})
+        res.render('allCategory', {data : allCategory})
     }catch(error){
         res.status(500).json({
             message : "All Category is not shown",

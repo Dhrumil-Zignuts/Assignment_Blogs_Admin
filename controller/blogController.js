@@ -10,6 +10,7 @@ cloudinary.config({
     api_secret : `${process.env.CLOUDNARY_S_KEY}`
 })
 
+// Get All Blogs
 const getAllBlog = async (req,res)=>{
     try{
         const allBlogs = await Blogs.find({})
@@ -17,7 +18,7 @@ const getAllBlog = async (req,res)=>{
         //     message : "Here are All Blogs",
         //     data : allBlogs
         // })
-        res.render('dashboard', {data : allBlogs});
+        res.render('dashboard', {blogs : allBlogs});
     }catch(error){
         res.status(500).json({
             message : "All Blogs are not shown",
@@ -26,6 +27,7 @@ const getAllBlog = async (req,res)=>{
     }
 }
 
+// Add New Blogs
 const addNewBlog = async(req,res, next)=>{
     // console.log(req.body);
     const file = await req.files.photo;
@@ -58,6 +60,7 @@ const addNewBlog = async(req,res, next)=>{
     }
 }
 
+// Delete Blogs
 const deleteBlog = async (req,res)=>{
     const id = req.params.blogId;
 
@@ -75,6 +78,7 @@ const deleteBlog = async (req,res)=>{
     }
 }
 
+// update Blogs
 const updateBlog = async (req,res)=>{
     const id = req.params.blogId;
     

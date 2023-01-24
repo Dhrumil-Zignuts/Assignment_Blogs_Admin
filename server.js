@@ -37,12 +37,12 @@ app.use('/category',category)
 app.get('/addNewBlog', (req,res)=>{
     res.render('addNewBlog')
 })
-// app.get('/profile', (req,res)=>{
-//     res.render('profile', {})
-// })
-// app.get('/sign-in', (req,res)=>{
-//     res.render('sign-in',)
-// })
+app.get('/addNewCategory', (req,res)=>{
+    res.render('addNewCategory')
+})
+app.get('/', (req,res)=>{
+    res.render('sign-in',)
+})
 // app.get('/tables', (req,res)=>{
 //     res.render('tables')
 // })

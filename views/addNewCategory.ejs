@@ -45,9 +45,9 @@
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
             <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="javascript:;">Pages</a></li>
-            <li class="breadcrumb-item text-sm text-white active" aria-current="page">Add New Blog</li>
+            <li class="breadcrumb-item text-sm text-white active" aria-current="page">Tables</li>
           </ol>
-          <h6 class="font-weight-bolder text-white mb-0">Add New Blog</h6>
+          <h6 class="font-weight-bolder text-white mb-0">Tables</h6>
         </nav>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
           <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -58,7 +58,7 @@
           </div>
           
           <%- include('partials/sign-in-logo.ejs') -%>
-
+          
         </div>
       </div>
     </nav>
@@ -68,29 +68,15 @@
         <div class="col-12">
           <div class="card mb-4">
             <div class="card-header pb-0">
-              <h6 class="h3">Add New Blog Here</h6>
+              <h6 class="h3">Add New Category Here</h6>
             </div>
             <div class="card-body px-3 pt-0 pb-2 container mt-3 ">
               <form action="">
-                <div class="form-group">
-                  <label for="exampleInputEmail1" class="h6">Title</label>
-                  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="title of the blog">
-                </div>
-                <div class="form-group">
-                  <label for="exampleInputEmail1" class="h6">Select Category</label>
-                  <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                  </select>
-                </div>
-                <label for="exampleInputEmail1" class="h6">Description</label>
-                <textarea id="textEditor"></textarea>
-                <div class="form-group">
-                  <label for="exampleInputEmail1" class="h6 mt-2">Select Thumbnail</label>
-                  <input class="form-control form-control-lg" id="formFileLg" type="file">
-                </div>     
-                <div class="form-group">
+                <div class="form-group mt-3">
+                  <label for="exampleInputEmail1" class="h6 pb-3">Category</label>
+                  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="category name">
+                </div>    
+                <div class="form-group pt-3">
                   <button type="submit" class="btn btn-primary">Submit</button>
                 </div>     
               </form>
