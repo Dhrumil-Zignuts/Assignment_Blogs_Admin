@@ -9,7 +9,7 @@ const getAllCategory = async (req,res)=>{
         //     message : "Here are all Category",
         //     allCategory : allBlogs
         // })
-        res.render('allCategory', {data : allCategory})
+        res.render('allCategory', {category : allCategory})
     }catch(error){
         res.status(500).json({
             message : "All Category is not shown",
@@ -24,6 +24,7 @@ const addNewCategory = async (req,res)=>{
     const newCategory = new Category({
         newCategory : req.body.category
     })
+    
     try{
         const addedCategory = await newCategory.save()
         res.status(200).json({

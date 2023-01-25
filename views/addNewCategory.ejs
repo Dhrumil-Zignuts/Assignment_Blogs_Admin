@@ -20,91 +20,115 @@
   <!-- CSS Files -->
   <link id="pagestyle" href="../assets/css/argon-dashboard.css?v=2.0.4" rel="stylesheet" />
 
-  <!-- TinyMCE Script File -->
-  <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+  <!-- jQuery CDN Link  -->
+  <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
+    crossorigin="anonymous"></script>
 
-  <script>
-    tinymce.init({
-      selector: '#textEditor'
-    });
-  </script>
 </head>
 
 <body class="g-sidenav-show   bg-gray-100">
   <div class="min-height-300 bg-primary position-absolute w-100"></div>
-      
-  
-  
-  <%- include('partials/aside.ejs') -%>
-    
 
-  <main class="main-content position-relative border-radius-lg ">
-    <!-- Navbar -->
-    <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl " id="navbarBlur" data-scroll="false">
-      <div class="container-fluid py-1 px-3">
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-            <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="javascript:;">Pages</a></li>
-            <li class="breadcrumb-item text-sm text-white active" aria-current="page">Tables</li>
-          </ol>
-          <h6 class="font-weight-bolder text-white mb-0">Tables</h6>
-        </nav>
-        <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
-          <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-            <div class="input-group">
-              <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
-              <input type="text" class="form-control" placeholder="Type here...">
+
+
+  <%- include('partials/aside.ejs') -%>
+
+
+    <main class="main-content position-relative border-radius-lg ">
+      <!-- Navbar -->
+      <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl " id="navbarBlur"
+        data-scroll="false">
+        <div class="container-fluid py-1 px-3">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+              <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="javascript:;">Pages</a></li>
+              <li class="breadcrumb-item text-sm text-white active" aria-current="page">Tables</li>
+            </ol>
+            <h6 class="font-weight-bolder text-white mb-0">Tables</h6>
+          </nav>
+          <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+            <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+              <div class="input-group">
+                <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
+                <input type="text" class="form-control" placeholder="Type here...">
+              </div>
             </div>
-          </div>
-          
-          <%- include('partials/sign-in-logo.ejs') -%>
-          
-        </div>
-      </div>
-    </nav>
-    <!-- End Navbar -->
-    <div class="container-fluid py-4">
-      <div class="row">
-        <div class="col-12">
-          <div class="card mb-4">
-            <div class="card-header pb-0">
-              <h6 class="h3">Add New Category Here</h6>
-            </div>
-            <div class="card-body px-3 pt-0 pb-2 container mt-3 ">
-              <form action="">
-                <div class="form-group mt-3">
-                  <label for="exampleInputEmail1" class="h6 pb-3">Category</label>
-                  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="category name">
-                </div>    
-                <div class="form-group pt-3">
-                  <button type="submit" class="btn btn-primary">Submit</button>
-                </div>     
-              </form>
-            </div>
+
+            <%- include('partials/sign-in-logo.ejs') -%>
+
           </div>
         </div>
+      </nav>
+      <!-- End Navbar -->
+      <div class="container-fluid py-4">
+        <div class="row">
+          <div class="col-12">
+            <div class="card mb-4">
+              <div class="card-header pb-0">
+                <h6 class="h3">Add New Category Here</h6>
+              </div>
+              <div class="card-body px-3 pt-0 pb-2 container mt-3 ">
+                <form action="">
+                  <div class="form-group mt-3">
+                    <label for="exampleInputEmail1" class="h6 pb-3">Category</label>
+                    <input type="text" class="form-control" id="category" placeholder="category name">
+                  </div>
+                  <div class="d-flex">
+                    <div class="form-group pt-3">
+                      <button type="submit" class="btn cancel-btn" style="background-color: #dbe0ff3d;">Cancel</button>
+                    </div>
+                    <div class="form-group pt-3 px-3">
+                      <button type="submit" class="btn btn-primary submit-btn">Submit</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-    
-  </main>
-  <!--   Core JS Files   -->
-  <script src="../assets/js/core/popper.min.js"></script>
-  <script src="../assets/js/core/bootstrap.min.js"></script>
-  <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
-  <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
-  <script>
-    var win = navigator.platform.indexOf('Win') > -1;
-    if (win && document.querySelector('#sidenav-scrollbar')) {
-      var options = {
-        damping: '0.5'
+
+    </main>
+    <script>
+      $(document).ready(function () {
+        $('.cancel-btn').on('click', function () {
+          location.reload();
+        })
+        $('.submit-btn').on('click', function(){
+
+          const formData = {
+            category : $('#category').val()
+          }
+          console.log(formData);
+          $.ajax({
+            type: 'POST',
+            url: '/category/addNewCategory',
+            data: formData,
+            success: function(data){
+              location.reload()
+            }
+          })
+        })
+      })
+    </script>
+    <!--   Core JS Files   -->
+    <script src="../assets/js/core/popper.min.js"></script>
+    <script src="../assets/js/core/bootstrap.min.js"></script>
+    <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
+    <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
+    <script>
+      var win = navigator.platform.indexOf('Win') > -1;
+      if (win && document.querySelector('#sidenav-scrollbar')) {
+        var options = {
+          damping: '0.5'
+        }
+        Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
       }
-      Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
-    }
-  </script>
-  <!-- Github buttons -->
-  <script async defer src="https://buttons.github.io/buttons.js"></script>
-  <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="../assets/js/argon-dashboard.min.js?v=2.0.4"></script>
+    </script>
+    <!-- Github buttons -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
+    <script src="../assets/js/argon-dashboard.min.js?v=2.0.4"></script>
 </body>
 
 </html>

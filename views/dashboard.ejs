@@ -9,18 +9,18 @@
   <title>
     Bloging Platgorm
   </title>
-  
+
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
-  
+
   <!-- Nucleo Icons -->
   <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
   <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
-  
+
   <!-- Font Awesome Icons -->
   <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
   <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
-  
+
   <!-- CSS Files -->
   <link id="pagestyle" href="../assets/css/argon-dashboard.css?v=2.0.4" rel="stylesheet" />
 
@@ -46,7 +46,7 @@
   </style>
 </head>
 
-<body class="g-sidenav-show   bg-gray-100">
+<body class="g-sidenav-show bg-gray-100">
   <div class="min-height-300 bg-primary position-absolute w-100"></div>
 
   <%- include('partials/aside.ejs') -%>
@@ -97,18 +97,20 @@
                           <%= blogs[i].category %>
                         </p>
                         <p class="text-xxs mb-2 text-uppercase font-weight-bold">published on :27/08/2023</p>
-                        <p class="mb-4 mt-3 text-sm" style="
+                        <p class="mb-4 mt-3 text-sm blogDescription" id="description-data" style="
                       /* border: 1px solid red; */
                       height: 68px;
                       width: 100%;
                       overflow: hidden;
                       text-overflow: ellipsisd;
-                    ">
+                    " >
                           <%= blogs[i].description%>
                         </p>
                         <div class="d-flex justify-content-end">
-                          <span ><button href="" class="px-3 font-weight-bold text-warning actions btn btn-link delete-btn" value=" <%= blogs[i]._id%>">delete</button></span>
-                          <span><button href="" class="px-3 font-weight-bold text-primary actions btn btn-link edit-btn" value=" <%= blogs[i]._id%>">edit</button></span>
+                          <span><button class="btn btn-link delete-btn px-3 font-weight-bold text-warning actions"
+                              value=" <%= blogs[i]._id%>">delete</button></span>
+                          <span><button class="btn btn-link edit-btn px-3 font-weight-bold text-primary actions "
+                              value=" <%= blogs[i]._id%>">edit</button></span>
                         </div>
                       </div>
                     </div>
@@ -122,33 +124,59 @@
     </main>
 
     <script>
-      $(document).ready( function(){
-        $('#delete-btn').on('click', function(blogs){
+      $(document).ready(function () {
+
+        $('.blogDescription').each(function() {
+          let tempHTML = $(this).text();
+          $(this).html(tempHTML)
+       
+        });
+
+        $('.blogDescription').each(function(){
+          let temp = $(this).text();
+          $(this).html(temp)
+          console.log(temp);
+        })
+
+
+        // let blogsDescription = document.getElementsByClassName('blogDescription');
+
+        // if (blogsDescription.length > 0) {
+        //   for(let i = 0; i < blogsDescription.length; i++){
+        //     let tempHTML = $().html();
+        //     alert(tempHTML);
+        //   }
+        // }
+        $('.delete-btn').on('click', function (blogs) {
+          // alert('Botton is Clicked');
           const id = $(this).val();
-                console.log(id);
-                $.ajax({
-                    type: 'DELETE',
-                    url: `/blogs/${id}`,
-                    data: id,
-                    success: function (data) {
-                        location.href = 'dashboard';
-                    }
-                })
+          const blogID = id.trim();
+
+          console.log(`This is a AJAX button value ${blogID}`);
+          $.ajax({
+            type: 'DELETE',
+            url: `/blogs/${blogID}`,
+            data: id,
+            success: function (data) {
+              // location.href = 'dashboard';
+              location.reload();
+            }
+          })
         })
       })
     </script>
 
     <!-- <script src="../assets/js/dashboard.js"></script> -->
-    
+
     <script src="../assets/js/core/popper.min.js"></script>
     <script src="../assets/js/core/bootstrap.min.js"></script>
     <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
     <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
     <script src="../assets/js/plugins/chartjs.min.js"></script>
-    
+
     <script>
       var win = navigator.platform.indexOf('Win') > -1;
-      if (win && document.querySelector('#sidenav-scrollbar')) { 
+      if (win && document.querySelector('#sidenav-scrollbar')) {
         var options = {
           damping: '0.5'
         }
@@ -158,10 +186,10 @@
     <!-- Github buttons -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-    <!-- <script src="../assets/js/argon-dashboard.min.js?v=2.0.4"></script> -->
+    <script src="../assets/js/argon-dashboard.min.js?v=2.0.4"></script>
 
 
-    
+
 </body>
 
 </html>

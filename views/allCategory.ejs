@@ -95,11 +95,14 @@
                       </tr>
                     </thead>
                     <tbody>
+                      <% for(let i = 0; i < category.length; i++){ %>
                       <tr>
                         <td>
-                          <div class="d-flex px-5 py-3">
+                          <div class=" px-5 py-3">
                             <div class="d-flex flex-column justify-content-center">
-                              <h6 class="mb-0 text-sm">Buseness and Technology</h6>
+                              <h6 class="mb-0 text-sm">
+                                <input type="text" class="form-control w-100" value="<%= category[i].newCategory%>">                                
+                              </h6>
                             </div>
                           </div>
                         </td>
@@ -108,15 +111,13 @@
                         <td class="align-middle text-center text-sm">
                         </td>
                         <td class="align-middle text-center">
-                          <span class=" text-xs font-weight-bold" style="color: red;">delete</span>
+                          <span><button class="btn btn-link text-warning text-xs font-weight-bold" value="<%= category[i].category%>">delete</button></span>
                         </td>
                         <td class="align-middle">
-                          <a href="javascript:;" class="text-primary font-weight-bold text-xs" data-toggle="tooltip"
-                            data-original-title="Edit user">
-                            Edit
-                          </a>
+                          <span><button class="btn btn-link text-primary text-xs font-weight-bold" value="<%= category[i].category%>">edit</button></span>
                         </td>
                       </tr>
+                      <% } %>
                     </tbody>
                   </table>
                 </div>

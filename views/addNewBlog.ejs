@@ -23,6 +23,10 @@
   <!-- TinyMCE Script File -->
   <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 
+  <!-- jQuery CDN Link  -->
+  <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
+    crossorigin="anonymous"></script>
+
   <script>
     tinymce.init({
       selector: '#textEditor'
@@ -71,27 +75,27 @@
               <h6 class="h3">Add New Blog Here</h6>
             </div>
             <div class="card-body px-3 pt-0 pb-2 container mt-3 ">
-              <form action="">
+              <form id="form-Data" method="POST" action="/blogs/addNewBlog" enctype="multipart/form-data">
                 <div class="form-group">
                   <label for="exampleInputEmail1" class="h6">Title</label>
-                  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="title of the blog">
+                  <input name="title" type="text" class="form-control title" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="title of the blog">
                 </div>
                 <div class="form-group">
                   <label for="exampleInputEmail1" class="h6">Select Category</label>
-                  <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                  <select name="category" class="form-select form-select-lg mb-3 category" aria-label=".form-select-lg example">
+                    <% for(let i = 0; i < categorys.length; i++) {%>
+                    <option value="<%= categorys[i].newCategory %>"><%= categorys[i].newCategory %></option>
+                    <% } %>
                   </select>
                 </div>
                 <label for="exampleInputEmail1" class="h6">Description</label>
-                <textarea id="textEditor"></textarea>
+                <textarea id="textEditor" name="description" value="description" class="category"></textarea>
                 <div class="form-group">
                   <label for="exampleInputEmail1" class="h6 mt-2">Select Thumbnail</label>
-                  <input class="form-control form-control-lg" id="formFileLg" type="file">
+                  <input class="form-control form-control-lg file" id="formFileLg" type="file" name="photo">
                 </div>     
                 <div class="form-group">
-                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <button type="submit" class="btn btn-primary submit-btn">Submit</button>
                 </div>     
               </form>
             </div>
@@ -101,6 +105,43 @@
     </div>
     
   </main>
+
+
+  <script>
+    // $(document).ready( function (){
+    //   $('submit-btn').on('click', function(){
+    //     e.preventdefault();
+        // alert(`Submit button`)
+
+          // const data = new FormData();
+
+          // data.append('title', $('.title').val());
+          // data.append('category',$('.category').val());
+          // data.append('description',$('.description').val());
+          // data.append('photo', $('.file')[0].files[0]);
+
+    //       const formData = {
+    //         title : $('.title').val(),
+    //         category : $('.category').val(),
+    //         description : $('.description').val(),
+    //         photo: $('.photo').val()
+    //       }
+    //       console.log(data);
+    //       $.ajax({
+    //                 type: 'POST',
+    //                 url: '/blogs/AddNewBlog',
+    //                 data: formData,
+    //                 success: function (data) {
+    //                     console.log(data);
+    //                     // location.reload();
+    //                 }
+    //             })
+    //       return false;
+    //   })
+    // })
+  </script>
+
+
   <!--   Core JS Files   -->
   <script src="../assets/js/core/popper.min.js"></script>
   <script src="../assets/js/core/bootstrap.min.js"></script>

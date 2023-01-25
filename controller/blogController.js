@@ -2,6 +2,7 @@ const { render } = require('ejs');
 const mongoose = require('mongoose')
 const slugify = require('slugify')
 const Blogs = require('../model/blogModel')
+// const Categorys = require('../model/categpryModel')
 const cloudinary = require('cloudinary').v2;
 
 cloudinary.config({
@@ -18,6 +19,7 @@ const getAllBlog = async (req,res)=>{
         //     message : "Here are All Blogs",
         //     data : allBlogs
         // })
+        // const allCategory = await Categorys.find({})
         res.render('dashboard', {blogs : allBlogs});
     }catch(error){
         res.status(500).json({
@@ -29,7 +31,7 @@ const getAllBlog = async (req,res)=>{
 
 // Add New Blogs
 const addNewBlog = async(req,res, next)=>{
-    // console.log(req.body);
+    console.log(req.body);
     const file = await req.files.photo;
     const result = await cloudinary.uploader.upload(file.tempFilePath)
     // console.log(result);
@@ -47,11 +49,11 @@ const addNewBlog = async(req,res, next)=>{
     })
     try{
         const addedBlog = await blogData.save()
-        res.status(200).json({
-            message : "Blog is successfully Added",
-            addedBlog : addedBlog
-        })
-        res.render('addNewBlog')
+        // res.status(200).json({
+        //     message : "Blog is successfully Added",
+        //     addedBlog : addedBlog
+        // })
+        res.redirect('/addNewBlog')
     }catch(error){
         res.status(500).json({
             message : "Blog is not Added",
@@ -63,6 +65,7 @@ const addNewBlog = async(req,res, next)=>{
 // Delete Blogs
 const deleteBlog = async (req,res)=>{
     const id = req.params.blogId;
+    console.log(`This is a Deleted Blog ID ${id}`);
 
     try{
         const deletedBlog = await Blogs.deleteOne({_id : id})
@@ -70,10 +73,13 @@ const deleteBlog = async (req,res)=>{
             message : "Blog is Deleted Successfully",
             deletedData : deletedBlog
         })
+        // res.render('dashboard')
+        // res.redirect('/blogs/getAllBlogs')
     }catch(error){
+        console.log(error);
         res.status(500).json({
             message : "Blog is not Deleted",
-            error : err
+            error : error
         })
     }
 }
