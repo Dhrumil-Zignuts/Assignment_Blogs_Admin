@@ -51,6 +51,10 @@ app.get('/addNewCategory', (req,res)=>{
 app.get('/', (req,res)=>{
     res.render('sign-in',)
 })
+app.get('/updateBlogPage', (req,res)=>{
+    // console.log(req.query);
+    res.render('updateBlogPage')
+})
 
 port = process.env.PORT || 3000;
 app.listen(port, connectDB(port));

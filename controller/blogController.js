@@ -2,6 +2,7 @@ const { render } = require('ejs');
 const mongoose = require('mongoose')
 const slugify = require('slugify')
 const Blogs = require('../model/blogModel')
+const Category = require('../model/categpryModel')
 // const Categorys = require('../model/categpryModel')
 const cloudinary = require('cloudinary').v2;
 
@@ -29,6 +30,22 @@ const getAllBlog = async (req,res)=>{
     }
 }
 
+const getOneBlog = async (req,res)=>{
+    console.log(`This is a GetOneBlog Data params ID :${req.params.blogId}`);
+    const id = req.params.blogId
+    try{
+        const oneBlog = await Blogs.findOne({_id : id })
+        const category = await Category.find({})
+        // console.log(oneBlog);
+        res.render('updateBlogPage', {blog : oneBlog, category: category});
+    }catch(error){
+        res.status(500).json({
+            Message : 'This error in GetOneBlog Contriller',
+            error : error
+        })
+    }
+    
+}
 // Add New Blogs
 const addNewBlog = async(req,res, next)=>{
     console.log(req.body);
@@ -65,7 +82,6 @@ const addNewBlog = async(req,res, next)=>{
 // Delete Blogs
 const deleteBlog = async (req,res)=>{
     const id = req.params.blogId;
-    console.log(`This is a Deleted Blog ID ${id}`);
 
     try{
         const deletedBlog = await Blogs.deleteOne({_id : id})
@@ -87,23 +103,33 @@ const deleteBlog = async (req,res)=>{
 // update Blogs
 const updateBlog = async (req,res)=>{
     const id = req.params.blogId;
+    console.log(` This is a body in update Field : ${req.body}`);
     
-    try{
-        const updatedBlog = await Blogs.updateOne({_id : id}, {$set : req.body})
-        res.status(200).json({
-            message : "Blog is Updated",
-            data : updatedBlog
-        })
-    }catch(error){
-        res.status(500).json({
-            message : "Blog is not Updated",
-            error : error
-        })
+    const information = {
+        courseName: req.body.title,
+        courseDuration: req.body.description,
+        courseFee: req.body.category
     }
+    console.log(information);
+    // console.log(blogData);
+    // try{
+    //     const updatedBlog = await Blogs.updateOne({_id : id}, {$set : req.body})
+    //     // res.status(200).json({
+    //     //     message : "Blog is Updated",
+    //     //     data : updatedBlog
+    //     // })
+    //     res.redirect('/addNewBlog');
+    // }catch(error){
+    //     res.status(500).json({
+    //         message : "Blog is not Updated",
+    //         error : error
+    //     })
+    // }
 }
 module.exports = {
     addNewBlog,
     deleteBlog,
     getAllBlog,
-    updateBlog
+    updateBlog,
+    getOneBlog
 }

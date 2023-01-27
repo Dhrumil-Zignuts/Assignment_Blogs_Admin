@@ -109,7 +109,7 @@
                         <div class="d-flex justify-content-end">
                           <span><button class="btn btn-link delete-btn px-3 font-weight-bold text-warning actions"
                               value=" <%= blogs[i]._id%>">delete</button></span>
-                          <span><button class="btn btn-link edit-btn px-3 font-weight-bold text-primary actions "
+                          <span><button class=" edit-blogs btn btn-link edit-btn px-3 font-weight-bold text-primary actions "
                               value=" <%= blogs[i]._id%>">edit</button></span>
                         </div>
                       </div>
@@ -125,6 +125,19 @@
 
     <script>
       $(document).ready(function () {
+        $('.edit-blogs').on('click', function(){
+          const id = $(this).val()
+
+          $.ajax({
+            type:'GET',
+            url :`/blogs/${id.trim()}`,
+            data: id,
+            success : function(data){
+              location.href = `/blogs/${id.trim()}`
+            }
+          })
+        })
+        
 
         $('.blogDescription').each(function() {
           let tempHTML = $(this).text();
@@ -135,7 +148,7 @@
         $('.blogDescription').each(function(){
           let temp = $(this).text();
           $(this).html(temp)
-          console.log(temp);
+          // console.log(temp);
         })
 
 

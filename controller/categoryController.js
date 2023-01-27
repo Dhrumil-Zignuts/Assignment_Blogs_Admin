@@ -58,10 +58,12 @@ const deleteCategory = async (req,res) =>{
 
 // Update Category
 const updateCategory = async (req,res) => {
+    console.log(req.body);
+    console.log(req.params);
     const id = req.params.categoryId;
 
     try{
-        const updatedCategory = await Category.updateOne({ _id : id }, { $set:  { newCategory : req.body.category }  })
+        const updatedCategory = await Category.updateOne({ _id : id }, { $set:  { newCategory : req.body.editedCategory }  })
         res.status(200).json({
             message : "Category is successfully Updated",
             updatedData : updatedCategory
@@ -69,7 +71,7 @@ const updateCategory = async (req,res) => {
     }catch(error){
         res.status(500).json({
             message : "Categorry is not updated..!",
-            error : err
+            error : error
         })
     }
 }
