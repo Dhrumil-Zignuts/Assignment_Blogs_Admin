@@ -102,29 +102,24 @@ const deleteBlog = async (req,res)=>{
 
 // update Blogs
 const updateBlog = async (req,res)=>{
-    const id = req.params.blogId;
-    console.log(` This is a body in update Field : ${req.body}`);
-    
-    const information = {
-        courseName: req.body.title,
-        courseDuration: req.body.description,
-        courseFee: req.body.category
+
+    const id = req.params.blogId.trim();
+    const { title, description, category } = req.body;
+    // console.log(`This is a ID in Update Page: ${id}`);
+    // console.log(` This is a body in update Field : ${(req.body.title)}`)
+
+    try{
+        const updatedBlog = await Blogs.updateOne({_id : id}, {$set : { title, description, category }})
+        res.status(200).json({
+            message : "Blog is Updated",
+            data : updatedBlog
+        })
+    }catch(error){
+        res.status(500).json({
+            message : "Blog is not Updated",
+            error : error
+        })
     }
-    console.log(information);
-    // console.log(blogData);
-    // try{
-    //     const updatedBlog = await Blogs.updateOne({_id : id}, {$set : req.body})
-    //     // res.status(200).json({
-    //     //     message : "Blog is Updated",
-    //     //     data : updatedBlog
-    //     // })
-    //     res.redirect('/addNewBlog');
-    // }catch(error){
-    //     res.status(500).json({
-    //         message : "Blog is not Updated",
-    //         error : error
-    //     })
-    // }
 }
 module.exports = {
     addNewBlog,

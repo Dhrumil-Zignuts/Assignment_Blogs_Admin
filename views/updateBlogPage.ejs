@@ -75,7 +75,7 @@
               <h6 class="h3">Update Blog Here</h6>
             </div>
             <div class="card-body px-3 pt-0 pb-2 container mt-3 ">
-                <p><%= blog._id%></p>
+                <p></p>
               <form id="form">
                 <div class="form-group">
                   <label for="exampleInputEmail1" class="h6">Title</label>
@@ -93,13 +93,13 @@
                   </select>
                 </div>
                 <label for="exampleInputEmail1" class="h6">Description</label>
-                <textarea id="textEditor" name="description" value="description" id="category"><%= blog.description %></textarea>
+                <textarea id="textEditor" name="description" value="description"><%= blog.description %></textarea>
                 <div class="form-group">
                   <label for="exampleInputEmail1" class="h6 mt-2">Select Thumbnail</label>
                   <input class="form-control form-control-lg file" id="photo" type="file" name="photo" value="<%= blog.imageurl%>">
                 </div>     
                 <div class="form-group">
-                  <button class="btn btn-primary update-btn">Update</button>
+                  <button type="submit" class="btn btn-primary update-btn" data-id="<%= blog._id%>">Update</button>
                 </div>     
               </form>
             </div>
@@ -111,9 +111,10 @@
   </main>
   <script>
    $(document).ready(function (){
-    $('.update-btn').on('click', function(){
-        event.preventDefault();
-        const id = $(this).val();
+
+    $('.update-btn').on('click', function(event){
+
+        const id = $(this).data('id');
 
         const form = document.getElementById('form');
         const formData = new FormData(form);
@@ -123,20 +124,25 @@
             updatedData[key] = value;
         }
         // const data = {data : updatedData}
+
+       $('input[type="file"]').each((file, i) => {
+        updatedData["photo"] = file;
+       })
+        
+        console.log(id);
         console.log(updatedData);
       
         $.ajax({
-            type:'PUT',
-            url:`blogs/${id.trim()}`,
+            type: 'put',
+            url:`/blogs/${id.trim()}`,
             enctype: 'multipart/form-data',
-            processData: false,
-            contentType: false,
             data: updatedData,
             success: function(){
-                console.log('Congrats');
-                // location.href = '/blogs/getAllBlog'
+                location.href = 'getAllBlogs'
             }
         })
+      event.preventDefault();
+
     })
    })
   </script>

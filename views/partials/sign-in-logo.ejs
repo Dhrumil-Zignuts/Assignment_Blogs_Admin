@@ -1,8 +1,8 @@
 <ul class="navbar-nav  justify-content-end">
     <li class="nav-item d-flex align-items-center">
-      <a href="/" class="nav-link text-white font-weight-bold px-0">
+      <a href="/" class="logout nav-link text-white font-weight-bold px-0">
         <i class="fa fa-user me-sm-1"></i>
-        <span class="d-sm-inline d-none">Sign In</span>
+        <span class="d-sm-inline d-none">Logout</span>
       </a>
     </li>
     <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
@@ -15,3 +15,17 @@
       </a>
     </li>
 </ul>
+<script>
+  $(document).ready(function(){
+    $('.logout').on('click', function(){
+      $.ajax({
+        type: 'GET',
+        url : `/user/logout`,
+        credentials: 'same-origin',
+        success: function(){
+          location.href = '/'
+        }
+      })
+    })
+  })
+</script>

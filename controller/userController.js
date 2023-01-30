@@ -27,13 +27,13 @@ const login = (req, res) => {
                     },
                         process.env.JWT_KEY,
                         {
-                            expiresIn: '1h'
+                            expiresIn: '3h'
                         })
-                    res.cookie('access_token',token,{
-                        httpOnly : true
+                    res.cookie('access_token', token, {
+                        httpOnly: true
                     }).status(200).json({
-                        message : 'Authentication Successful and Token Generated and stored in cookie',
-                        token : token
+                        message: 'Authentication Successful and Token Generated and stored in cookie',
+                        token: token
                     })
                 } else {
                     res.status(500).json({
@@ -49,20 +49,27 @@ const login = (req, res) => {
     })
 }
 
-const logout = (req,res)=>{
-    try{
-        res
-        .clearCookie('access_token')
-        .status(200)
-        .json({
+const logout = async (req, res) => {
+    try {
+         res.clearCookie("access_token")
+         
+         res.status(200).json({
             message: "you Successfully Logout yourself"
         })
-    }catch(err){
+        // cookie = req.cookies;
+        // for (var prop in cookie) {
+        //     if (!cookie.hasOwnProperty(prop)) {
+        //         continue;
+        //     }
+        //     res.cookie(prop, '', { expires: new Date(0) });
+        // }
+        // res.redirect('/');
+    } catch (err) {
         res
-        .status(500)
-        .json({
-            error: err
-        })
+            .status(500)
+            .json({
+                error: err
+            })
     }
 }
 
