@@ -77,16 +77,20 @@
       <!-- End Navbar -->
       <div class="container-fluid py-4">
         <div class="row">
-          <% for(let i=0; i < blogs.length; i++ ) {%>
+          <% for(let i=0; i < blogs.length; i++ ) { %>
             <div class="col-xl-6 col-sm-12 mb-xl-4 mb-4">
               <div class="card">
                 <div class="card-body p-3">
                   <div class="row" style="padding: 15px;">
-                    <div class="col-4 text-start blog-image" style="
-                      background: url('<%= blogs[i].imageurl%>') no-repeat center center/cover;
-                      height: 200px;
-                      padding: 5px 15px;
-                  ">
+                    <div class="col-4 d-flex flex-column">
+                      <div class=" text-start blog-image" style="
+                        background: url('<%= blogs[i].imageurl%>') no-repeat center center/cover;
+                        height: 200px;
+                        padding: 5px 15px;
+                    ">
+                      </div>
+                      <a href="/updateImage?id=<%= blogs[i]._id%>"
+                        class="btn btn-link edit-btn px-3 font-weight-bold text-primary">edit image</a>
                     </div>
                     <div class="col-8 content-div">
                       <div class="numbers">
@@ -96,20 +100,24 @@
                         <p class="text-xs mb-2 text-uppercase font-weight-bold">
                           <%= blogs[i].category %>
                         </p>
-                        <p class="text-xxs mb-2 text-uppercase font-weight-bold">published on :27/08/2023</p>
+                        <p class="text-xxs mb-2 text-uppercase font-weight-bold">published on :&nbsp;&nbsp;<%=
+                            blogs[i].createdAt.getDate()%>/<%= blogs[i].createdAt.getMonth()+1%>/<%=
+                                blogs[i].createdAt.getFullYear()%>
+                        </p>
                         <p class="mb-4 mt-3 text-sm blogDescription" id="description-data" style="
                       /* border: 1px solid red; */
                       height: 68px;
                       width: 100%;
                       overflow: hidden;
                       text-overflow: ellipsisd;
-                    " >
+                    ">
                           <%= blogs[i].description%>
                         </p>
                         <div class="d-flex justify-content-end">
                           <span><button class="btn btn-link delete-btn px-3 font-weight-bold text-warning actions"
                               value=" <%= blogs[i]._id%>">delete</button></span>
-                          <span><button class=" edit-blogs btn btn-link edit-btn px-3 font-weight-bold text-primary actions "
+                          <span><button
+                              class=" edit-blogs btn btn-link edit-btn px-3 font-weight-bold text-primary actions "
                               value=" <%= blogs[i]._id%>">edit</button></span>
                         </div>
                       </div>
@@ -122,59 +130,50 @@
         </div>
       </div>
     </main>
-
     <script>
       $(document).ready(function () {
-        $('.edit-blogs').on('click', function(){
+        $('.edit-blogs').on('click', function () {
           const id = $(this).val()
 
           $.ajax({
-            type:'GET',
-            url :`/blogs/${id.trim()}`,
+            type: 'GET',
+            url: `/blogs/${id.trim()}`,
             data: id,
-            success : function(data){
+            success: function (data) {
               location.href = `/blogs/${id.trim()}`
             }
           })
         })
-        
 
-        $('.blogDescription').each(function() {
+
+        $('.blogDescription').each(function () {
           let tempHTML = $(this).text();
           $(this).html(tempHTML)
-       
+
         });
 
-        $('.blogDescription').each(function(){
+        $('.blogDescription').each(function () {
           let temp = $(this).text();
           $(this).html(temp)
           // console.log(temp);
         })
 
-
-        // let blogsDescription = document.getElementsByClassName('blogDescription');
-
-        // if (blogsDescription.length > 0) {
-        //   for(let i = 0; i < blogsDescription.length; i++){
-        //     let tempHTML = $().html();
-        //     alert(tempHTML);
-        //   }
-        // }
         $('.delete-btn').on('click', function (blogs) {
-          // alert('Botton is Clicked');
-          const id = $(this).val();
-          const blogID = id.trim();
+          if (confirm("Are you sure want to delete Blog") == true) {
+            const id = $(this).val();
+            const blogID = id.trim();
 
-          console.log(`This is a AJAX button value ${blogID}`);
-          $.ajax({
-            type: 'DELETE',
-            url: `/blogs/${blogID}`,
-            data: id,
-            success: function (data) {
-              // location.href = 'dashboard';
-              location.reload();
-            }
-          })
+            console.log(`This is a AJAX button value ${blogID}`);
+            $.ajax({
+              type: 'DELETE',
+              url: `/blogs/${blogID}`,
+              data: id,
+              success: function (data) {
+                // location.href = 'dashboard';
+                location.reload();
+              }
+            })
+          }
         })
       })
     </script>

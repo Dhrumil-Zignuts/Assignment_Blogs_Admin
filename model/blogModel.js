@@ -21,7 +21,12 @@ const blogSchema = mongoose.Schema({
         type : String,
         required : true
     },
-    
+    image_id : {
+        type : String,
+        require: true
+    } 
+}, {
+    timestamps: true
 })
 
 module.exports = mongoose.model('BloggingPlatform_blog', blogSchema)

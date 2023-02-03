@@ -1,5 +1,7 @@
 const jwt = require('jsonwebtoken')
 
+
+// Check the User 
 const checkAuth = async (req,res,next)=>{
     
     const token = req.cookies.access_token;

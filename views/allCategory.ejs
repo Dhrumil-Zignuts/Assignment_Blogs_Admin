@@ -20,9 +20,9 @@
   <!-- CSS Files -->
   <link id="pagestyle" href="../assets/css/argon-dashboard.css?v=2.0.4" rel="stylesheet" />
 
-   <!-- jQuery CDN Link  -->
-   <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
-   crossorigin="anonymous"></script>
+  <!-- jQuery CDN Link  -->
+  <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
+    crossorigin="anonymous"></script>
 
   <style>
     .table-striped>tbody>tr:nth-child(odd)>td,
@@ -34,7 +34,7 @@
 
 <body class="g-sidenav-show bg-gray-100">
   <div class="min-height-300 bg-primary position-absolute w-100"></div>
-  
+
   <%- include('partials/aside.ejs') -%>
 
     <main class="main-content position-relative border-radius-lg ">
@@ -51,14 +51,11 @@
           </nav>
           <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
             <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-              <div class="input-group">
-                <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
-                <input type="text" class="form-control" placeholder="Type here...">
-              </div>
+              
             </div>
 
             <%- include('partials/sign-in-logo.ejs') -%>
-          
+
           </div>
         </div>
       </nav>
@@ -85,29 +82,33 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <% for(let i = 0; i < category.length; i++){ %>
-                      <tr>
-                        <td>
-                          <div class=" px-5 py-3">
-                            <div class="d-flex flex-column justify-content-center">
-                              <h6 class="mb-0 text-sm">
-                                <input type="text" class="form-control w-100 category" value="<%= category[i].newCategory%>" style="border: none; border-radius: 0px; border-bottom: 1px solid rgb(169, 169, 169); background-color: transparent; outline: none;" >                                
-                              </h6>
+                      <% for(let i=0; i < category.length; i++){ %>
+                        <tr>
+                          <td>
+                            <div class=" px-5 py-3">
+                              <div class="d-flex flex-column justify-content-center">
+                                <h6 class="mb-0 text-sm">
+                                  <input type="text" maxlength="15" minlength="3" class="form-control w-100 category"
+                                    value="<%= category[i].newCategory%>"
+                                    style="border: none; border-radius: 0px; border-bottom: 1px solid rgb(169, 169, 169); background-color: transparent; outline: none;">
+                                </h6>
+                              </div>
                             </div>
-                          </div>
-                        </td>
-                        <td>
-                        </td>
-                        <td class="align-middle text-center text-sm">
-                        </td>
-                        <td class="align-middle text-center">
-                          <span><button class="btn btn-link text-warning text-xs font-weight-bold delete-category" value="<%= category[i]._id%>">delete</button></span>
-                        </td>
-                        <td class="align-middle">
-                          <span><button class="btn btn-link text-primary text-xs font-weight-bold edit-category" value="<%= category[i]._id%>">edit</button></span>
-                        </td>
-                      </tr>
-                      <% } %>
+                          </td>
+                          <td>
+                          </td>
+                          <td class="align-middle text-center text-sm">
+                          </td>
+                          <td class="align-middle text-center">
+                            <span><button class="btn btn-link text-warning text-xs font-weight-bold delete-category"
+                                value="<%= category[i]._id%>">delete</button></span>
+                          </td>
+                          <td class="align-middle">
+                            <span><button class="btn btn-link text-primary text-xs font-weight-bold edit-category"
+                                value="<%= category[i]._id%>">edit</button></span>
+                          </td>
+                        </tr>
+                        <% } %>
                     </tbody>
                   </table>
                 </div>
@@ -117,29 +118,31 @@
         </div>
       </div>
     </main>
-    
+
     <script>
-      $(document).ready(function (){
-        $('.delete-category').on('click', function(){
-          const id = $(this).val();
-          console.log(id);
-          $.ajax({
-            type: 'DELETE',
-            url:`/category/${id}`,
-            data: id,
-            success: function(data){
-              location.reload();
-            }
-          })
+      $(document).ready(function () {
+        $('.delete-category').on('click', function () {
+          if (confirm("Are you Sure want to delete the") == true){
+            const id = $(this).val();
+            console.log(id);
+            $.ajax({
+              type: 'DELETE',
+              url: `/category/${id}`,
+              data: id,
+              success: function (data) {
+                location.reload();
+              }
+            })
+          }
         })
-        $('.edit-category').on('click', function(){
+        $('.edit-category').on('click', function () {
           id = $(this).val()
           // const editedCategory = $('.category').val() 
           $.ajax({
             type: 'PATCH',
             url: `/category/${id}`,
-            data: updatedCategory = {editedCategory : $('.category').val()},
-            success: function(data){
+            data: updatedCategory = { editedCategory: $('.category').val() },
+            success: function (data) {
               location.reload();
             }
           })

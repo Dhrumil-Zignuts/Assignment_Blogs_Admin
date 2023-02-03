@@ -55,10 +55,7 @@
         </nav>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
           <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-            <div class="input-group">
-              <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
-              <input type="text" class="form-control" placeholder="Type here...">
-            </div>
+            
           </div>
           
           <%- include('partials/sign-in-logo.ejs') -%>
@@ -78,11 +75,11 @@
               <form id="form-Data" method="POST" action="/blogs/addNewBlog" enctype="multipart/form-data">
                 <div class="form-group">
                   <label for="exampleInputEmail1" class="h6">Title</label>
-                  <input name="title" type="text" class="form-control title" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="title of the blog">
+                  <input maxlength="30" required name="title" type="text" class="form-control title" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="title of the blog">
                 </div>
                 <div class="form-group">
                   <label for="exampleInputEmail1" class="h6">Select Category</label>
-                  <select name="category" class="form-select form-select-lg mb-3 category" aria-label=".form-select-lg example">
+                  <select required name="category" class="form-select form-select-lg mb-3 category" aria-label=".form-select-lg example">
                     <% for(let i = 0; i < categorys.length; i++) {%>
                     <option value="<%= categorys[i].newCategory %>"><%= categorys[i].newCategory %></option>
                     <% } %>
@@ -92,7 +89,7 @@
                 <textarea id="textEditor" name="description" value="description" class="category"></textarea>
                 <div class="form-group">
                   <label for="exampleInputEmail1" class="h6 mt-2">Select Thumbnail</label>
-                  <input class="form-control form-control-lg file" id="formFileLg" type="file" name="photo">
+                  <input required class="form-control form-control-lg file" id="formFileLg" type="file" name="photo">
                 </div>     
                 <div class="form-group">
                   <button type="submit" class="btn btn-primary submit-btn">Submit</button>
@@ -108,37 +105,6 @@
 
 
   <script>
-    // $(document).ready( function (){
-    //   $('submit-btn').on('click', function(){
-    //     e.preventdefault();
-        // alert(`Submit button`)
-
-          // const data = new FormData();
-
-          // data.append('title', $('.title').val());
-          // data.append('category',$('.category').val());
-          // data.append('description',$('.description').val());
-          // data.append('photo', $('.file')[0].files[0]);
-
-    //       const formData = {
-    //         title : $('.title').val(),
-    //         category : $('.category').val(),
-    //         description : $('.description').val(),
-    //         photo: $('.photo').val()
-    //       }
-    //       console.log(data);
-    //       $.ajax({
-    //                 type: 'POST',
-    //                 url: '/blogs/AddNewBlog',
-    //                 data: formData,
-    //                 success: function (data) {
-    //                     console.log(data);
-    //                     // location.reload();
-    //                 }
-    //             })
-    //       return false;
-    //   })
-    // })
   </script>
 
 

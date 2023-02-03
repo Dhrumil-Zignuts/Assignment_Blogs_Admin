@@ -4,21 +4,21 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
-  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="/assets/img/favicon.png">
   <title>
     Argon Dashboard 2 by Creative Tim
   </title>
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
   <!-- Nucleo Icons -->
-  <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
-  <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
+  <link href="/assets/css/nucleo-icons.css" rel="stylesheet" />
+  <link href="/assets/css/nucleo-svg.css" rel="stylesheet" />
   <!-- Font Awesome Icons -->
   <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-  <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
+  <link href="/assets/css/nucleo-svg.css" rel="stylesheet" />
   <!-- CSS Files -->
-  <link id="pagestyle" href="../assets/css/argon-dashboard.css?v=2.0.4" rel="stylesheet" />
+  <link id="pagestyle" href="/assets/css/argon-dashboard.css?v=2.0.4" rel="stylesheet" />
 
   <!-- TinyMCE Script File -->
   <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
@@ -75,11 +75,10 @@
               <h6 class="h3">Update Blog Here</h6>
             </div>
             <div class="card-body px-3 pt-0 pb-2 container mt-3 ">
-                <p></p>
-              <form id="form">
+              <form id="form" action="/blogs/<%= blog._id%>" method="POST" enctype="multipart/form-data">
                 <div class="form-group">
                   <label for="exampleInputEmail1" class="h6">Title</label>
-                  <input name="title" type="text" class="form-control title" id="title" aria-describedby="emailHelp" placeholder="title of the blog" value="<%= blog.title%>">
+                  <input required name="title" type="text" class="form-control title" id="title" aria-describedby="emailHelp" placeholder="title of the blog" value="<%= blog.title%>">
                 </div>
                 <div class="form-group">
                   <label for="exampleInputEmail1" class="h6">Select Category</label>
@@ -94,10 +93,6 @@
                 </div>
                 <label for="exampleInputEmail1" class="h6">Description</label>
                 <textarea id="textEditor" name="description" value="description"><%= blog.description %></textarea>
-                <div class="form-group">
-                  <label for="exampleInputEmail1" class="h6 mt-2">Select Thumbnail</label>
-                  <input class="form-control form-control-lg file" id="photo" type="file" name="photo" value="<%= blog.imageurl%>">
-                </div>     
                 <div class="form-group">
                   <button type="submit" class="btn btn-primary update-btn" data-id="<%= blog._id%>">Update</button>
                 </div>     
@@ -119,18 +114,33 @@
         const form = document.getElementById('form');
         const formData = new FormData(form);
 
+
         const updatedData = {}
         for (const [key, value] of formData) {
             updatedData[key] = value;
-        }
-        // const data = {data : updatedData}
-
-       $('input[type="file"]').each((file, i) => {
-        updatedData["photo"] = file;
-       })
-        
-        console.log(id);
+          }
         console.log(updatedData);
+        // const updateFile = updatedData.photo
+        // console.log(`This is a updateFile value : ${updateFile}`);
+
+        // delete updatedData.photo
+
+        // const myFile = $('#photo').prop('file');
+        // updatedData["photo"] = myFile;
+        
+        const editorData = tinymce.activeEditor.getContent();
+        updatedData["description"] = editorData;
+        
+        
+        // $('input[type="file"]').each((file, i) => {
+        //   updatedData["photo"] = file;
+        // })
+        
+        // console.log(updatedData);
+        // const file = {}
+        // file["photo"] = updateFile
+        // console.log(`This is File Object : ${file}`);
+        // console.log(file.photo);
       
         $.ajax({
             type: 'put',
@@ -139,7 +149,10 @@
             data: updatedData,
             success: function(){
                 location.href = 'getAllBlogs'
-            }
+            },
+            error : function(){
+              location.href = 'errorPage'
+            } 
         })
       event.preventDefault();
 
@@ -148,10 +161,10 @@
   </script>
 
   <!--   Core JS Files   -->
-  <script src="../assets/js/core/popper.min.js"></script>
-  <script src="../assets/js/core/bootstrap.min.js"></script>
-  <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
-  <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
+  <script src="/assets/js/core/popper.min.js"></script>
+  <script src="/assets/js/core/bootstrap.min.js"></script>
+  <script src="/assets/js/plugins/perfect-scrollbar.min.js"></script>
+  <script src="/assets/js/plugins/smooth-scrollbar.min.js"></script>
   <script>
     var win = navigator.platform.indexOf('Win') > -1;
     if (win && document.querySelector('#sidenav-scrollbar')) {
@@ -164,7 +177,7 @@
   <!-- Github buttons -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="../assets/js/argon-dashboard.min.js?v=2.0.4"></script>
+  <script src="/assets/js/argon-dashboard.min.js?v=2.0.4"></script>
 </body>
 
 </html>
