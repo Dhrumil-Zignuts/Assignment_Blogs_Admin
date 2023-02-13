@@ -30,7 +30,7 @@ const login = (req, res) => {
                         {
                             expiresIn: '3h'
                         })
-                    req.toastr.success(`Welcome back boss !!`,'ERROR!')
+                    
                     res.cookie('access_token', token, {
                         httpOnly: true
                     }).status(200).json({

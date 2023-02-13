@@ -59,20 +59,24 @@ const deleteCategory = async (req, res) => {
 
 // Update Category
 const updateCategory = async (req, res) => {
+    console.log(req.body);
     const errors = validationResult(req)
     if (!errors.isEmpty()) {
+        console.log(`Error Accured`);
         const alert = errors.array()
-        res.render('errorPage', { alert })
+        console.log(alert);
+        // res.render('errorPage', { alert })
     } else {
         console.log(req.body);
         console.log(req.params);
         const id = req.params.categoryId;
         try {
-            const updatedCategory = await Category.updateOne({ _id: id }, { $set: { newCategory: req.body.editedCategory } })
-            res.status(200).json({
-                message: "Category is successfully Updated",
-                updatedData: updatedCategory
-            })
+            const updatedCategory = await Category.updateOne({ _id: id }, { $set: { newCategory: req.body.category } })
+            // res.status(200).json({
+            //     message: "Category is successfully Updated",
+            //     updatedData: updatedCategory
+            // })
+            res.redirect('/category/getAllCategory')
         } catch (error) {
             res.status(500).json({
                 message: "Categorry is not updated..!",

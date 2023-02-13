@@ -12,7 +12,7 @@ router.post('/addNewCategory', checkAuth, [
         .isLength({ min: 3, max: 20 })
 ], categoryController.addNewCategory)
 router.delete('/:categoryId', checkAuth, categoryController.deleteCategory)
-router.patch('/:categoryId', checkAuth,[
+router.post('/:categoryId', checkAuth,[
     check('category', "Title should have min 3 character and max 20 character")
         .exists()
         .notEmpty()

@@ -51,6 +51,7 @@ const addNewBlog = async (req, res, next) => {
     const errors = validationResult(req)
     if (!errors.isEmpty()) {
         const alert = errors.array()
+        console.log(alert);
         // res.status(422).jsonp(alert)
         res.render('errorPage', { alert })
     } else {

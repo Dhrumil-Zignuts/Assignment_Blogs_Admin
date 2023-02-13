@@ -51,7 +51,7 @@
           </nav>
           <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
             <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-              
+
             </div>
 
             <%- include('partials/sign-in-logo.ejs') -%>
@@ -84,29 +84,31 @@
                     <tbody>
                       <% for(let i=0; i < category.length; i++){ %>
                         <tr>
-                          <td>
-                            <div class=" px-5 py-3">
-                              <div class="d-flex flex-column justify-content-center">
-                                <h6 class="mb-0 text-sm">
-                                  <input type="text" maxlength="15" minlength="3" class="form-control w-100 category"
-                                    value="<%= category[i].newCategory%>"
-                                    style="border: none; border-radius: 0px; border-bottom: 1px solid rgb(169, 169, 169); background-color: transparent; outline: none;">
-                                </h6>
+                          <form action="/category/<%= category[i]._id%>" method="post">
+                            <td>
+                              <div class=" px-5 py-3">
+                                <div class="d-flex flex-column justify-content-center">
+                                  <h6 class="mb-0 text-sm">
+                                    <input name="category" type="text" maxlength="15" minlength="3" class="form-control w-100"
+                                      id="category" value="<%= category[i].newCategory%>"
+                                      style="border: none; border-radius: 0px; border-bottom: 1px solid rgb(169, 169, 169); background-color: transparent; outline: none;">
+                                  </h6>
+                                </div>
                               </div>
-                            </div>
-                          </td>
-                          <td>
-                          </td>
-                          <td class="align-middle text-center text-sm">
-                          </td>
-                          <td class="align-middle text-center">
-                            <span><button class="btn btn-link text-warning text-xs font-weight-bold delete-category"
-                                value="<%= category[i]._id%>">delete</button></span>
-                          </td>
-                          <td class="align-middle">
-                            <span><button class="btn btn-link text-primary text-xs font-weight-bold edit-category"
-                                value="<%= category[i]._id%>">edit</button></span>
-                          </td>
+                            </td>
+                            <td>
+                            </td>
+                            <td class="align-middle text-center text-sm">
+                            </td>
+                            <td class="align-middle text-center">
+                              <span><button class="btn btn-link text-warning text-xs font-weight-bold delete-category"
+                                  value="<%= category[i]._id%>">delete</button></span>
+                            </td>
+                            <td class="align-middle">
+                              <span><button type="submit" class="btn btn-link text-primary text-xs font-weight-bold edit-category"
+                                  value="<%= category[i]._id%>">edit</button></span>
+                            </td>
+                          </form>
                         </tr>
                         <% } %>
                     </tbody>
@@ -122,7 +124,7 @@
     <script>
       $(document).ready(function () {
         $('.delete-category').on('click', function () {
-          if (confirm("Are you Sure want to delete the") == true){
+          if (confirm("Are you Sure want to delete the") == true) {
             const id = $(this).val();
             console.log(id);
             $.ajax({
@@ -135,18 +137,20 @@
             })
           }
         })
-        $('.edit-category').on('click', function () {
-          id = $(this).val()
-          // const editedCategory = $('.category').val() 
-          $.ajax({
-            type: 'PATCH',
-            url: `/category/${id}`,
-            data: updatedCategory = { editedCategory: $('.category').val() },
-            success: function (data) {
-              location.reload();
-            }
-          })
-        })
+        // $('.edit-category').on('click', function () {
+        //   id = $(this).val()
+        //   alert(id)
+        //   const editedCategory = $('#category').val()
+        //   alert(editedCategory)
+        //   $.ajax({
+        //     type: 'PATCH',
+        //     url: `/category/${id}`,
+        //     data: updatedCategory = { category: editedCategory },
+        //     success: function (data) {
+        //       location.reload();
+        //     }
+        //   })
+        // })
       })
     </script>
     <!--   Core JS Files   -->
