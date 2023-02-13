@@ -12,7 +12,7 @@ const { check, validationResult } = require('express-validator');
 // Cloudnary Config Code
 cloudinary.config({
     cloud_name: "dhrumil-zignuts",
-    api_key: "192973428147176",
+    api_key: "API KEY",
     api_secret: `${process.env.CLOUDNARY_S_KEY}`
 })
 
