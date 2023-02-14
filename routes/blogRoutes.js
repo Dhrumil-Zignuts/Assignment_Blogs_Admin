@@ -21,7 +21,7 @@ router.put('/:blogId', checkAuth, [
     .exists()
     .notEmpty()
     .isLength({min : 3, max : 20}),
-    check('description', 'Please Insert Atlest 20 character')
+    check('description', 'in the Blog Description Please Insert Atlest 20 character')
     .exists()
     .notEmpty()
     .isLength({min : 20})

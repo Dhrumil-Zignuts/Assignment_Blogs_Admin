@@ -113,7 +113,8 @@ const updateBlog = async (req, res) => {
     if (!errors.isEmpty()) {
         const alert = errors.array()
         // res.status(422).json(alert)
-        res.render('errorPage', { alert })
+        // res.render('errorPage', { alert })
+        res.status(404).send(alert)
     } else {
         const id = req.params.blogId.trim();
         const { title, description, category } = req.body;

@@ -72,6 +72,10 @@ app.get('/addNewCategory', (req,res)=>{
 app.get('/', (req,res)=>{
     res.render('sign-in', {req})
 })
+// app.get('/error', (req,res)=>{
+//     console.log(req.query);
+//     res.render('errorPage', { alert : req.query })
+// })
 
 // update Blog page
 app.get('/updateBlogPage', (req,res)=>{
