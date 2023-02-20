@@ -13,7 +13,7 @@ const { check, validationResult } = require('express-validator');
 cloudinary.config({
     cloud_name: "dhrumil-zignuts",
     api_key: "192973428147176",
-    api_secret: `${process.env.CLOUDNARY_S_KEY}`
+    api_secret: `Hilub4Bpr0N87pL-pfsOuueHp_Q`
 })
 
 // Get All Blogs
