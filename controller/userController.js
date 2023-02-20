@@ -26,7 +26,7 @@ const login = (req, res) => {
                         email: user.email,
                         userID: user._id
                     },
-                        process.env.JWT_KEY,
+                        'blogAdmin',
                         {
                             expiresIn: '3h'
                         })
