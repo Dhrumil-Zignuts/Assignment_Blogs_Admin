@@ -1,0 +1,9 @@
+{
+    "env" :{
+        "JWT_KEY" : "blogAdmin",
+        "MONGODB_PASS" : "QFGGgsH135RDTwpEMDtI", 
+        "MONGODB_HOST": "15.206.7.200",
+        "MONGODB_PORT": "28017",
+        "CLOUDNARY_S_KEY" : "Hilub4Bpr0N87pL-pfsOuueHp_Q"
+    }
+}
